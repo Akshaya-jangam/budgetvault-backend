@@ -26,31 +26,36 @@ public class SecurityConfig {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
 
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(
-                List.of("http://localhost:3000")
-        );
+@Bean
+public CorsConfigurationSource corsConfigurationSource() {
+    CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedMethods(
-                List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
-        );
+    configuration.setAllowedOrigins(
+        List.of(
+            "http://localhost:3000",
+            "https://budgetvault-frontend.vercel.app"
+        )
+    );
 
-        configuration.setAllowedHeaders(
-                List.of("Authorization", "Content-Type", "Accept")
-        );
+    configuration.setAllowedMethods(
+        List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
+    );
 
-        configuration.setAllowCredentials(false);
+    configuration.setAllowedHeaders(
+        List.of("Authorization", "Content-Type", "Accept")
+    );
 
-        UrlBasedCorsConfigurationSource source =
-                new UrlBasedCorsConfigurationSource();
+    configuration.setAllowCredentials(false);
 
-        source.registerCorsConfiguration("/**", configuration);
+    UrlBasedCorsConfigurationSource source =
+        new UrlBasedCorsConfigurationSource();
 
-        return source;
-    }
+    source.registerCorsConfiguration("/**", configuration);
+
+    return source;
+}
+
 
     @Bean
     @Order(1)
